@@ -14,7 +14,7 @@ const getOllUsers = ():Promise<AxiosResponse<IResponseUser>> => {
 
 // 'https://dummyjson.com/users/5/posts'
 const getOllPostFromUser = (userId:number):Promise<AxiosResponse<IResponsePost>> => {
-    return axiosInstence.get('' + userId + '/post')
+    return axiosInstence.get('' + userId + '/posts')
 }
 
 export {
