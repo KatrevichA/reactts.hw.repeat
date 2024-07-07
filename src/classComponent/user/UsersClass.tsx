@@ -1,19 +1,23 @@
 import React from "react";
-import {getAllUsers} from "../../services/api.service";
+import {getAllPostsByUserId, getAllUsers} from "../../services/api.service";
 import {IUserModel} from "../../models/user/IUserModel";
 import UserClass from "./UserClass";
 import PostsClass from "../post/PostsClass";
+import {IPostModel} from "../../models/post/IPostModel";
 
 
 type MyState = {
-    users: IUserModel[]
+    users: IUserModel[],
+    posts:IPostModel[],
+    getAllPostsByUserId:(id:number)=>void
 }
-
 
 class UsersClass extends React.Component<{}, MyState> {
 
     state: MyState = {
-        users: []
+        users: [],
+        posts:[],
+        getAllPostsByUserId:(id:number)=>getAllPostsByUserId(id).then(value => this.setState({posts:value.data.posts}))
     }
 
     componentDidMount() {
@@ -23,15 +27,18 @@ class UsersClass extends React.Component<{}, MyState> {
     }
 
     render() {
+
+        const {getAllPostsByUserId,posts} = this.state;
+
         return (<div>
             {
                 this.state.users.map(user => (
                     <UserClass key={user.id}
                                user={user}
-                               clickHandler={id => this}/>))
+                               getAllPostsByUserId={getAllPostsByUserId}/>))
             }
 
-            <div><PostsClass id={2}/></div>
+            <div><PostsClass posts={posts}/></div>
 
         </div>)
     }

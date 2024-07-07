@@ -6,26 +6,26 @@ type MyState = {
     posts: IPostModel[]
 }
 
-type myProps = {
-    id:number
-}
+// type myProps = {
+//     id:number
+// }
 
-class PostsClass extends React.Component<myProps, MyState> {
-    state: MyState = {
-        posts: []
-    }
-    props: myProps ={
-        id: 1
-    }
-
-    componentDidMount() {
-        getAllPostsByUserId(this.props.id).then(value => this.setState({posts: value.data.posts}))
-    }
+class PostsClass extends React.Component<MyState> {
+    // state: MyState = {
+    //     posts: []
+    // }
+    // props: myProps ={
+    //     id: 1
+    // }
+    //
+    // componentDidMount() {
+    //     getAllPostsByUserId(this.props.id).then(value => this.setState({posts: value.data.posts}))
+    // }
 
     render() {
         return (<div>
             {
-                this.state.posts.map(posts=> (<div key={posts.id}>{posts.title}</div>))
+                this.props.posts.map(post=> (<div key={post.id}>{post.title}</div>))
             }
         </div>)
     }

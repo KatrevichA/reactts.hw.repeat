@@ -8,7 +8,6 @@ const App:FC = () => {
   return (
     <div>
       <UsersClass/>
-        <PostsClass id={1}/>
     </div>
   );
 }
